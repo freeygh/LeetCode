@@ -1,0 +1,29 @@
+% C++ 生成括号
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        if (n == 0)
+            return vector<string>();
+
+        vector<string > ret;
+
+        dfs(ret, "", n, n);
+
+        return ret;
+    }
+
+    //利用二叉树递归思想
+    void dfs(vector<string> &ret, string tmp, int left, int right)
+    {
+        if (0 == left && 0 == right)
+        {
+            ret.push_back(tmp);
+            return;
+        }
+        else if (left > 0)
+            dfs(ret, tmp + '(', left - 1, right);
+
+        if (left < right)
+            dfs(ret, tmp + ')', left, right - 1);
+    }
+};
